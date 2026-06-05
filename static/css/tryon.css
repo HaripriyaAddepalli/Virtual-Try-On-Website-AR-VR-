@@ -1,0 +1,136 @@
+body {
+  font-family: 'Lora', serif; /* Luxurious, sophisticated font */
+  background: linear-gradient(135deg, #faf5ec, #efe5db); /* Elegant gradient */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #cd825b; /* Burnt Sienna */
+  color: #efe5db; /* Antique White */
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+main {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  background: linear-gradient(135deg, #cd825b, #b56947); /* Gradient for premium look */
+  color: #efe5db; /* Antique White */
+  border: none;
+  padding: 15px 25px;
+  font-size: 18px;
+  margin: 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #b56947, #a85c40);
+  transform: translateY(-2px);
+}
+
+button:focus {
+  outline: none;
+}
+
+video {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  border: 4px solid #cd825b; /* Burnt Sienna */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+img {
+  max-width: 100%;
+  border-radius: 10px;
+  border: 4px solid #cd825b; /* Burnt Sienna */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+h2 {
+  margin: 20px 0;
+  font-size: 2em;
+  color: #cd825b; /* Burnt Sienna */
+  border-bottom: 2px solid #efe5db; /* Antique White */
+  padding-bottom: 10px;
+}
+
+#subcategories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+#subcategories h3 {
+  color: #cd825b; /* Burnt Sienna */
+  border-bottom: 2px solid #efe5db; /* Antique White */
+  padding-bottom: 5px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#subcategories .category-btn {
+  background: transparent; /* No background color */
+  color: #cd825b; /* Burnt Sienna text */
+  border: 2px solid #cd825b; /* Burnt Sienna border */
+  padding: 10px 20px;
+  font-size: 18px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#subcategories .category-btn:hover {
+  background: #cd825b; /* Burnt Sienna */
+  color: #efe5db; /* Antique White */
+  transform: translateY(-2px);
+}
+
+#product-catalog {
+  margin-top: 40px;
+}
+
+#product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+#product-grid div {
+  background: #faf5ec; /* Linen */
+  padding: 20px;
+  border: 2px solid #efe5db; /* Antique White */
+  border-radius: 10px;
+  flex: 1 1 calc(33% - 40px);
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#product-grid p {
+  margin: 0;
+  font-size: 1.2em;
+}

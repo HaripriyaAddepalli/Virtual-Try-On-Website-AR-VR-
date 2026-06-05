@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Try-On</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='tryon.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="header">
+    <h1>Virtual Try-On</h1>
+    <p>Experience luxury fashion like never before.</p>
+  </header>
+
+  <main>
+    <section class="upload-section">
+      <h2>Get Started</h2>
+      <div class="upload-options">
+        <!-- Image Upload Form -->
+        <form id="upload-form" method="POST" enctype="multipart/form-data">
+          <input type="file" id="file-input" name="image" accept="image/*" style="display: none" onchange="previewImage(event)" />
+          <button type="button" class="btn" onclick="document.getElementById('file-input').click()">Upload Image</button>
+          <button type="submit" class="btn">Submit Image</button>
+        </form>
+        <button id="start-camera" class="btn" type="button">Start Camera</button>
+      </div>
+      <div class="image-preview">
+        <!-- Preview Uploaded Image -->
+        {% if filename %}
+        <h3>Image Preview</h3>
+        <img id="uploaded-image" src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Preview" />
+        {% else %}
+        <img id="uploaded-image" style="display: none" alt="Uploaded Preview" />
+        <video id="camera-feed" autoplay style="display: none"></video>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- Categories Section: Visible Only After Upload -->
+    <section id="categories-section" {% if not filename %}style="display:none;"{% endif %}>
+      <h2>Select a Category</h2>
+      <form method="POST">
+        <div class="categories-container">
+          <button type="submit" class="category-btn" name="category" value="men">Men</button>
+          <button type="submit" class="category-btn" name="category" value="women">Women</button>
+          <button type="submit" class="category-btn" name="category" value="kids">Kids</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Product Catalog (Show After Category Selection) -->
+    {% if category %}
+    <section id="product-catalog">
+      <h2>Products for {{ category.title() }}</h2>
+      <div id="product-grid">
+        {% for product in products %}
+        <div class="product-item" onclick="handleProductSelection('{{ product.image }}')">
+          <input type="hidden" id="uploaded-image-path" value="{{ url_for('uploaded_file', filename=filename) }}" />
+          <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}" />
+          <p>{{ product.name }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Virtual Try-On. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Function to preview the uploaded image
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function () {
+        var output = document.getElementById("uploaded-image");
+        output.src = reader.result;
+        output.style.display = "block"; // Show image
+        document.getElementById("camera-feed").style.display = "none"; // Hide camera feed
+      };
+      reader.readAsDataURL(event.target.files[0]); // Read the image file
+    }
+
+    // Start the camera feed
+    document.getElementById("start-camera").addEventListener("click", function () {
+      const video = document.getElementById("camera-feed");
+      const imagePreview = document.getElementById("uploaded-image");
+
+      imagePreview.style.display = "none"; // Hide image preview
+      video.style.display = "block"; // Show camera feed
+
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((err) => {
+          console.error("Error accessing camera: ", err);
+          alert("Camera access denied.");
+        });
+    });
+
+    // Function to handle product selection
+    function handleProductSelection(productImage) {
+      var uploadedImagePath = document.getElementById("uploaded-image-path").value;
+
+      fetch("/tryon/process_product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          product: productImage,
+          uploadedImagePath: uploadedImagePath,
+        }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    }
+  </script>
+</body>
+</html>

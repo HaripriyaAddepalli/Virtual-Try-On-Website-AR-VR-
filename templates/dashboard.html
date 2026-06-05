@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>Dashboard</h2>
+    </div>
+    <nav class="nav-menu">
+      <a href="/"><i class="fas fa-home"></i> Home</a>
+      <a href="/tryon"><i class="fas fa-tshirt"></i> Tryon</a>
+      <a href="#closet"><i class="fas fa-tshirt"></i> My Closet</a>
+      <a href="#wishlist"><i class="fas fa-heart"></i> Wishlist</a>
+      <a href="#orders"><i class="fas fa-box"></i> Orders</a>
+      <a href="#profile"><i class="fas fa-user"></i> Profile</a>
+      <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
+      <a href="#help"><i class="fas fa-question-circle"></i> Help</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <h1>Welcome to Your Dashboard</h1>
+      </div>
+      <div class="header-right">
+        <div class="icon" data-tooltip="Notifications"><i class="fas fa-bell"></i></div>
+        <div class="icon" data-tooltip="Profile"><i class="fas fa-user"></i></div>
+        <a class="signout-btn" data-tooltip="Sign Out" href="/login">Sign Out</a>
+      </div>
+    </header>
+
+    <!-- Dashboard Overview -->
+    <section class="dashboard-overview">
+      
+      <div class="card">
+        <h2>Saved Outfits</h2>
+        <p>View all your saved outfits in your virtual closet.</p>
+      </div>
+
+      <div class="card">
+        <h2>Wishlist</h2>
+        <p>Items you’ve marked as favorites for future purchases.</p>
+      </div>
+
+      <div class="card">
+        <h2>Order Tracking</h2>
+        <p>Check the status of your recent orders.</p>
+      </div>
+
+      <div class="card">
+        <h2>Notifications</h2>
+        <p>Stay updated with new product launches and sales.</p>
+      </div>
+    </section>
+
+    <!-- Shopping Stats Section -->
+    <section class="shopping-stats">
+      <div class="card">
+        <h2>Shopping Stats</h2>
+        <div class="stats">
+          <div class="stat">
+            <h3>This Week</h3>
+            <p>$1,250</p>
+          </div>
+          <div class="stat">
+            <h3>This Month</h3>
+            <p>$5,600</p>
+          </div>
+          <div class="stat">
+            <h3>This Year</h3>
+            <p>$68,400</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Optional JavaScript -->
+  <script src="optional.js"></script>
+  
+</body>
+</html>
